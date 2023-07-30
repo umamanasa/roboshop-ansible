@@ -1,6 +1,6 @@
 - name: Catalogue Setup
   hosts: all
-  become: true
+  become: yes
   vars:
     component: catalogue
     schema: true
