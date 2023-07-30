@@ -2,7 +2,7 @@
   hosts: all
   become: true
   tasks:
-    - name: Copy MongoDB yum repo file
+    - name: Copy MongoDB repo file
       ansible.builtin.copy:
         src: mongo.repo
         dest: /etc/yum.repos.d/mongo.repo
