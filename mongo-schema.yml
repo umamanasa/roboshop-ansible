@@ -9,5 +9,5 @@
     state: installed
 
 - name: Load Mongo Schema
-  ansible.builtin.yum: mongo --host mongodb-dev.manasareddy.online </app/schema/${{component}}.js
+  ansible.builtin.yum: mongo --host mongodb-dev.manasareddy.online </app/schema/{{component}}.js
 
