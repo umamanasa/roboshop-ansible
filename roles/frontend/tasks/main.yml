@@ -1,5 +1,5 @@
-- name: Set Hostname
-  ansible.builtin.shell: set-hostname frontend
+#- name: Set Hostname
+#  ansible.builtin.shell: set-hostname frontend
 
 - name: Install Nginx
   ansible.builtin.yum:
@@ -30,5 +30,27 @@
 - name: Restart Nginx
   ansible.builtin.systemd:
     name: nginx
+    state: restarted
+    enabled: yes
+
+- name: Create Nginx Prometheus Exporter Directory
+  ansible.builtin.file:
+    path: /opt/nginx_exporter
+    state: directory
+
+- name: Download Nginx Prometheus Exporter
+  ansible.builtin.unarchive:
+    src: https://github.com/nginxinc/nginx-prometheus-exporter/releases/download/v0.11.0/nginx-prometheus-exporter_0.11.0_linux_amd64.tar.gz
+    dest: /opt/nginx_exporter
+    remote_src: yes
+
+- name: Copy Nginx Prometheus Exporter Service
+  ansible.builtin.copy:
+    src: nginx-exporter.service
+    dest: /etc/systemd/system/nginx-exporter.service
+
+- name: Restart Nginx Prometheus Exporter Service
+  ansible.builtin.systemd:
+    name: nginx-exporter
     state: restarted
     enabled: yes
