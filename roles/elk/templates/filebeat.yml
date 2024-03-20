@@ -18,7 +18,7 @@ filebeat.inputs:
   # you can use different inputs for various configurations.
   # Below are the input specific configurations.
 
-  # filestream is an input for collecting log messages from files.
+  # filestream is an input for collecting log messages from nginx.conf.
   - type: filestream
 
     # Unique ID among all inputs, an ID is required.
@@ -44,12 +44,12 @@ filebeat.inputs:
     # before parsers, use include_message parser.
     #include_lines: ['^ERR', '^WARN']
 
-    # Exclude files. A list of regular expressions to match. Filebeat drops the files that
-    # are matching any regular expression from the list. By default, no files are dropped.
+    # Exclude nginx.conf. A list of regular expressions to match. Filebeat drops the nginx.conf that
+    # are matching any regular expression from the list. By default, no nginx.conf are dropped.
     #prospector.scanner.exclude_files: ['.gz$']
 
     # Optional additional fields. These fields can be freely picked
-    # to add additional information to the crawled log files for filtering
+    # to add additional information to the crawled log nginx.conf for filtering
     fields:
       component: {{ component }}
       log_type: {{ log_type }}
@@ -63,7 +63,7 @@ filebeat.config.modules:
   # Set to true to enable config reloading
   reload.enabled: false
 
-  # Period on which files under path should be checked for changes
+  # Period on which nginx.conf under path should be checked for changes
   #reload.period: 10s
 
 # ======================= Elasticsearch template setting =======================
